@@ -16,11 +16,11 @@ import argparse
 import numpy as np
 import tensorflow as tf
 
-def load_graph(keras_model_file):
+def load_graph(model_file):
   graph = tf.Graph()
   graph_def = tf.GraphDef()
 
-  with open(keras_model_file, "rb") as f:
+  with open(model_file, "rb") as f:
     graph_def.ParseFromString(f.read())
   with graph.as_default():
     tf.import_graph_def(graph_def)

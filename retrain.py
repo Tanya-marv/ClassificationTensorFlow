@@ -63,7 +63,7 @@ import sys
 
 import tensorflow as tf
 import tensorflow_hub as hub
-from tensorflow.contrib import quantize as contrib_quantize
+from tensorflow.quantization import quantize as contrib_quantize
 
 import visualization_utils as visual
 import image_utils as img_utils
@@ -75,7 +75,7 @@ FLAGS = None
 
 def add_final_retrain_ops(class_count, final_tensor_name, bottleneck_tensor,
                           quantize_layer, is_training):
-    """Adds a new softmax and fully-connected layer for training and eval.
+  """Adds a new softmax and fully-connected layer for training and eval.
 
   We need to retrain the top layer to identify our new classes, so this function
   adds the right operations to the graph, along with some variables to hold the
@@ -283,8 +283,6 @@ def export_model(module_spec, class_count, saved_model_dir):
 
 
 def main(_):
-    # Needed to make sure the logging output is visible.
-    # See https://github.com/tensorflow/tensorflow/issues/3047
     log.initialize_log_file()
     logging_verbosity = log.logging_level_verbosity(FLAGS.logging_verbosity)
     logging.set_verbosity(logging_verbosity)

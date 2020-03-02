@@ -1,8 +1,6 @@
 import os.path
 import tensorflow as tf
 
-import constants
-
 def ensure_dir_exists(dir_name):
     """Makes sure the folder exists on disk.
 
