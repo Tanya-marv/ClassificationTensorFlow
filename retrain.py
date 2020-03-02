@@ -75,16 +75,16 @@ FLAGS = None
 
 def add_final_retrain_ops(class_count, final_tensor_name, bottleneck_tensor,
                           quantize_layer, is_training):
-  """Adds a new softmax and fully-connected layer for training and eval.
+    """Adds a new softmax and fully-connected layer for training and eval.
 
-  We need to retrain the top layer to identify our new classes, so this function
-  adds the right operations to the graph, along with some variables to hold the
-  weights, and then sets up all the gradients for the backward pass.
+    We need to retrain the top layer to identify our new classes, so this function
+    adds the right operations to the graph, along with some variables to hold the
+    weights, and then sets up all the gradients for the backward pass.
 
-  The set up for the softmax and fully-connected layers is based on:
-  https://www.tensorflow.org/tutorials/mnist/beginners/index.html
+    The set up for the softmax and fully-connected layers is based on:
+    https://www.tensorflow.org/tutorials/mnist/beginners/index.html
 
-  Args:
+    Args:
     class_count: Integer of how many categories of things we're trying to
         recognize.
     final_tensor_name: Name string for the new final node that produces results.
@@ -94,10 +94,10 @@ def add_final_retrain_ops(class_count, final_tensor_name, bottleneck_tensor,
     is_training: Boolean, specifying whether the newly add layer is for training
         or eval.
 
-  Returns:
-    The tensors for the training and cross entropy results, and tensors for the
-    bottleneck input and ground truth input.
-  """
+    Returns:
+        The tensors for the training and cross entropy results, and tensors for the
+        bottleneck input and ground truth input.
+    """
     batch_size, bottleneck_tensor_size = bottleneck_tensor.get_shape().as_list()
     assert batch_size is None, 'We want to work with arbitrary batch size.'
     with tf.name_scope('input'):
@@ -160,14 +160,14 @@ def add_final_retrain_ops(class_count, final_tensor_name, bottleneck_tensor,
 def add_evaluation_step(result_tensor, ground_truth_tensor):
     """Inserts the operations we need to evaluate the accuracy of our results.
 
-  Args:
-    result_tensor: The new final node that produces results.
-    ground_truth_tensor: The node we feed ground truth data
-    into.
+    Args:
+        result_tensor: The new final node that produces results.
+        ground_truth_tensor: The node we feed ground truth data
+        into.
 
-  Returns:
-    Tuple of (evaluation step, prediction).
-  """
+      Returns:
+        Tuple of (evaluation step, prediction).
+    """
     with tf.name_scope('accuracy'):
         with tf.name_scope('correct_prediction'):
             prediction = tf.argmax(result_tensor, 1)
