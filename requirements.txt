@@ -13,7 +13,7 @@ Pillow==7.0.0
 protobuf==3.11.2
 six==1.13.0
 tensorboard==1.15.0
-tensorflow==1.15.0
+tensorflow==2.11.1
 tensorflow-estimator==1.15.1
 tensorflow-hub==0.7.0
 termcolor==1.1.0
